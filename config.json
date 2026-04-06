@@ -1,0 +1,27 @@
+{
+    "luckmail_config": {
+        "LUCKMAIL_BASE_URL": "https://mails.luckyous.com/",
+        "LUCKMAIL_API_KEY": "邮箱池秘钥",
+        "LUCKMAIL_PROJECT_CODE": "openai",
+        "LUCKMAIL_EMAIL_TYPE": "ms_imap",
+        "LUCKMAIL_DOMAIN": "hotmail.com"
+    },
+    "runtime_config": {
+        "proxy": "",
+        "proxy_file": "proxies.txt",
+        "proxy_scheme": "http",
+        "times": 10,
+        "max_success": 5,
+        "sleep_min": 5,
+        "sleep_max": 20,
+        "email_token_file": "" 
+    },
+    "cpa_config": {
+        "upload_cpa": true,
+        "cpa_auth": "Bearer cpa管理密码",
+        "cpa_url": "http://cpa地址:8317/v0/management/auth-files",
+        "maintain_enabled": true,
+        "target_valid_count": 100,
+        "check_interval_seconds": 600
+    }
+}
