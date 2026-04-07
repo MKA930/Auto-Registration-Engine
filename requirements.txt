@@ -1,0 +1,12 @@
+# 核心依赖（固定版本，解决 OPENSSL 错误）
+curl_cffi==0.13.0
+requests>=2.32.0
+certifi>=2026.1.4
+argparse>=1.4.0
+
+# 基础依赖
+cffi>=1.12.0
+pycparser>=2.23
+charset-normalizer>=3.4.4
+urllib3>=2.6.3
+idna>=3.11
