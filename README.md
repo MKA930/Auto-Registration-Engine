@@ -1,209 +1,216 @@
+****
 # 🚀 OpenAI 自动化注册引擎 (Auto-Registration Engine)
 
-这是一个基于 Python 编写的高效、自动化的 OpenAI 账号注册与管理脚本。本项目集成了自动化人机验证绕过、LuckMail 邮箱接码、代理池轮询以及独特的 **CPA 守护补仓模式**，能够实现账号的全自动注册、状态监控与库存管理。
-
-⚠️ **免责声明**：本项目仅供技术交流与学习使用。请遵守目标网站的使用条款（TOS）。因使用本脚本产生的任何后果由使用者自行承担。
+这是一个基于 Python 开发的全自动 OpenAI 账号注册与管理工具，集成 TLS 指纹绕过、LuckMail 邮箱接码、代理池轮询、CPA 云端守护补仓，支持 7×24 小时无人值守运行。
 
 ---
 
-## ⚠️ 免责声明
-
-本项目仅用于 **技术研究与学习交流**，请务必遵守目标网站的服务条款（TOS）。
-因使用本项目产生的任何风险与后果，均由使用者自行承担。
-
----
-
-## ✨ 核心特性
-
-### 🛡️ 风控绕过
-
-* 基于 `curl_cffi` 模拟真实 Chrome TLS 指纹
-* 有效降低 Cloudflare / Sentinel 风控拦截
-
-### 📧 接码模式
-
-* **API 自动建单**
-
-  * 本项目对接 LuckMail 邮箱平台自动获取邮箱与验证码，欢迎体验，地址：https://mails.luckyous.com/727273B1
-* **文本模式（阅后即焚）**
-
-  * 使用 `email----token` 文件
-  * 使用后自动删除，避免重复使用
-
-### 🤖 智能守护模式（核心）
-
-* 自动检测 CPA 云端账号状态
-* 自动清理失效账号
-* 按目标库存 **自动补号**
-* 支持 7x24 持续挂机运行
-
-### 🌐 代理池支持
-
-* 支持：
-
-  * `http`
-  * `socks5`
-  * `socks5h`
-* 自动轮询代理
-* 自动规避不支持地区（CN/HK）
-
-### 📤 云端上报
-
-* 自动上传账号到 CPA 系统
-* 实现远程统一管理
+# ⚠️ 免责声明
+本项目**仅用于技术研究与学习交流**。  
+任何因使用本工具产生的法律责任、风险后果由使用者自行承担，开发者不承担任何责任。  
+请遵守目标网站的服务条款（TOS）与当地法律法规。
 
 ---
 
-## 🛠️ 环境准备
+# ✨ 核心特性
+## 1. 🛡️ 智能风控绕过
+- 基于 `curl_cffi` 完全模拟 Chrome TLS 指纹  
+- 完美绕过 Cloudflare / Sentinel 人机验证  
+- 降低高频风控拦截概率，大幅提升注册成功率  
 
-### Python 版本
+## 2. 📧 多模式接码体系
+### ✔ API 模式（LuckMail）
+- 自动创建邮箱账号  
+- 自动接收邮件、提取验证码  
+- 支持自定义域名、邮箱类型、项目代号  
 
+### ✔ 文本模式（阅后即焚）
+- 支持 `email----token` 格式邮箱池  
+- 使用后自动删除该行，防止重复使用  
+- 适合批量注册场景  
+
+## 3. 🤖 CPA 智能守护模式（核心）
+自动实现：
+1. 定期检测 CPA 云端账号有效性  
+2. 清理失效账号  
+3. 按目标库存自动补号  
+4. 支持 7x24 持续挂机运行  
+5. 自动间隔巡检、动态补仓  
+
+配置项包括：
+- 目标有效账号数量  
+- 检测间隔  
+- 是否开启自动补仓  
+- 是否上传账号到 CPA 系统  
+
+## 4. 🌐 代理池轮询
+支持代理协议：
+- http  
+- socks5  
+- socks5h  
+
+特性：
+- 自动切换代理  
+- 自动过滤受限地区（CN / HK）  
+- 支持代理账号密码格式  
+- 保障注册 IP 多样性  
+
+## 5. 📤 云端账号管理
+- 自动注册成功后同步到 CPA  
+- 支持远程统一管理  
+- 便于批量调度、监控、库存管理  
+
+---
+
+# 🛠️ 环境要求
+- Python 3.10 ~ 3.11  
+- 支持 Windows / Linux  
+- 依赖：`curl_cffi==0.13.0`、`requests`、`argparse`、`certifi`  
+
+---
+
+# 📦 快速部署
+## 1. 文件结构
 ```
-Python 3.10+
+Auto-Registration-Engine/
+├── main.py                # 主程序
+├── config.json            # 配置文件
+├── requirements.txt       # 依赖清单
+├── proxies.txt            # 代理池
+├── emails.txt（可选）     # 文本邮箱 token 池
+├── tokens/（自动生成）
+├── accounts.txt（自动生成）
+└── run.log（后台运行产生）
 ```
 
-### 安装依赖
-
+## 2. 安装依赖
 ```bash
-pip install curl_cffi requests argparse
+pip install -r requirements.txt
 ```
 
-> ⚠️ 如果使用 LuckMail 私有 SDK，请确保模块已正确安装或放置。
+**requirements.txt 内容**
+```txt
+curl_cffi==0.13.0
+requests
+argparse
+certifi
+```
+
+## 3. 配置 config.json
+配置示例：
+```json
+{
+  "luckmail_config": {
+    "LUCKMAIL_BASE_URL": "https://mails.luckyous.com/",
+    "LUCKMAIL_API_KEY": "ak_xxx",
+    "LUCKMAIL_PROJECT_CODE": "openai",
+    "LUCKMAIL_EMAIL_TYPE": "ms_imap",
+    "LUCKMAIL_DOMAIN": "hotmail.com"
+  },
+  "runtime_config": {
+    "proxy": "",
+    "proxy_file": "proxies.txt",
+    "proxy_scheme": "http",
+    "times": 0,
+    "max_success": 0,
+    "sleep_min": 5,
+    "sleep_max": 20,
+    "email_token_file": "emails.txt"
+  },
+  "cpa_config": {
+    "upload_cpa": true,
+    "cpa_auth": "Bearer xxx",
+    "cpa_url": "http://xxx",
+    "maintain_enabled": true,
+    "target_valid_count": 100,
+    "check_interval_seconds": 600
+  }
+}
+```
 
 ---
 
-## ⚙️ 配置文件（config.json）
-
-程序启动时会自动读取 `config.json`
-
----
-
-### 1️⃣ luckmail_config（接码配置）
-
-| 字段                    | 示例                                                         | 说明          |
-| --------------------- | ---------------------------------------------------------- | ----------- |
-| LUCKMAIL_BASE_URL     | [https://mails.luckyous.com/](https://mails.luckyous.com/) | API 地址      |
-| LUCKMAIL_API_KEY      | ak_xxx                                                     | API Key（必填） |
-| LUCKMAIL_PROJECT_CODE | openai                                                     | 项目代号        |
-| LUCKMAIL_EMAIL_TYPE   | ms_imap                                                    | 邮箱类型        |
-| LUCKMAIL_DOMAIN       | hotmail.com                                                | 邮箱域名        |
-
----
-
-### 2️⃣ runtime_config（运行配置）
-
-| 字段               | 示例          | 说明         |
-| ---------------- | ----------- | ---------- |
-| proxy            | ""          | 单代理        |
-| proxy_file       | proxies.txt | 代理池文件      |
-| proxy_scheme     | http        | 协议         |
-| times            | 0           | 最大循环（0=无限） |
-| max_success      | 0           | 成功数上限      |
-| sleep_min        | 5           | 最小休眠       |
-| sleep_max        | 20          | 最大休眠       |
-| email_token_file | 1.txt       | 文本邮箱池      |
-
----
-
-### 3️⃣ cpa_config（守护模式）
-
-| 字段                     | 示例                       | 说明     |
-| ---------------------- | ------------------------ | ------ |
-| upload_cpa             | true                     | 上传开关   |
-| cpa_auth               | Bearer xxx               | 鉴权     |
-| cpa_url                | [http://xxx](http://xxx) | API 地址 |
-| maintain_enabled       | true                     | 守护模式   |
-| target_valid_count     | 100                      | 目标库存   |
-| check_interval_seconds | 600                      | 检查间隔   |
-
----
-
-## 🚀 使用方法
-
-### ✅ 方式一：直接运行
-
+# 🚀 运行方式
+## 方式 1：直接运行
 ```bash
 python main.py
 ```
 
----
-
-### ✅ 方式二：命令行参数
-
+## 方式 2：命令行参数覆盖配置
 ```bash
-# 使用文本邮箱池 + 守护模式 + 上传CPA
+# 使用文本邮箱池 + 开启守护模式 + 上传CPA
 python main.py \
   --email-token-file emails.txt \
   --maintain-enabled \
   --upload-cpa
 
-# 普通模式：注册10个号
-python main.py --max-success 10 --proxy-scheme socks5
+# 限制最多成功 10 个账号
+python main.py --max-success 10
+
+# 使用 socks5 代理
+python main.py --proxy-scheme socks5
+```
+
+## 方式 3：Linux 后台长期运行
+```bash
+nohup python main.py > run.log 2>&1 < /dev/null &
+```
+
+查看实时日志：
+```bash
+tail -f run.log
+```
+
+停止程序：
+```bash
+pkill -f main.py
 ```
 
 ---
 
-## 📄 数据文件格式
-
-### 📧 邮箱 Token 文件
-
-```
-email----token
-```
-
-示例：
-
+# 📄 文件格式说明
+## 1. 邮箱 Token 文件（email----token）
 ```
 user1@hotmail.com----tok_abc123
 user2@hotmail.com----tok_xyz789
 ```
+使用后自动删除该行。
 
-✔ 使用后自动删除（防重复）
-
----
-
-### 🌐 代理池（proxies.txt）
-
+## 2. 代理池文件 proxies.txt
 ```
-# 普通IP
 127.0.0.1:7890
-
-# 账号密码
 user:pass@1.1.1.1:8080
+socks5://user:pass@ip:port
 ```
 
 ---
 
-## 📁 输出文件
-
-| 文件           | 说明            |
-| ------------ | ------------- |
-| tokens/      | JSON token 文件 |
-| accounts.txt | 账号密码          |
-
-示例：
-
-```
-email----password
-```
+# 📁 输出文件
+| 文件           | 说明                             |
+| -------------- | -------------------------------- |
+| tokens/        | 保存登录凭证 JSON                |
+| accounts.txt   | 注册成功账号 email----password   |
+| run.log        | 程序运行日志（后台模式）         |
 
 ---
 
-## 🤝 贡献
+# 🤖 守护模式工作逻辑
+1. 读取 target_valid_count  
+2. 从 CPA 获取当前有效账号数量  
+3. 若不足 → 自动注册补号  
+4. 达到目标后进入等待  
+5. 按 check_interval_seconds 循环检查  
 
-欢迎：
+---
 
-* 提交 Issue
-* 提交 PR
-* 提供优化建议
+# ⭐ 贡献
+欢迎提交：
+- Issue  
+- PR  
+- 优化建议  
 
 ---
 
-## ⭐ 支持项目
-
-如果这个项目对你有帮助：
-
-👉 请点一个 **Star ⭐**
-
----
-
+# ⭐ 支持项目
+如果对你有帮助，欢迎点亮 Star ⭐
+****
