@@ -215,9 +215,7 @@ socks5://user:pass@ip:port
 如果对你有帮助，欢迎点亮 Star ⭐
 ****
 
----
-
 ## 📄 相关文档与开源协议
 
-- 📜 官方使用声明：[USE_DECLARATION.md](sslocal://flow/file_open?url=https%3A%2F%2Fgithub.com%2FMKA930%2FAuto-Registration-Engine%2Fblob%2Fmain%2FUSE_DECLARATION.md&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
-- ⚖️ 开源许可证：[LICENSE](sslocal://flow/file_open?url=https%3A%2F%2Fgithub.com%2FMKA930%2FAuto-Registration-Engine%2Fblob%2Fmain%2FLICENSE&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
+- 📜 官方使用声明：[USE_DECLARATION.md](USE_DECLARATION.md)
+- ⚖️ 开源许可证：[LICENSE](LICENSE)
