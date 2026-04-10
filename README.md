@@ -214,3 +214,15 @@ socks5://user:pass@ip:port
 # ⭐ 支持项目
 如果对你有帮助，欢迎点亮 Star ⭐
 ****
+
+---
+
+## 📄 相关文档与许可
+
+1. 📜 重要使用声明  
+   请在使用本项目前阅读并遵守全部条款：  
+   [USE_DECLARATION.md](sslocal://flow/file_open?url=USE_DECLARATION.md&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
+
+2. ⚖️ 开源许可证  
+   本项目授权条款如下：  
+   [LICENSE](sslocal://flow/file_open?url=LICENSE&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
