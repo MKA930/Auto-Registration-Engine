@@ -217,12 +217,7 @@ socks5://user:pass@ip:port
 
 ---
 
-## 📄 相关文档与许可
+## 📄 相关文档与开源协议
 
-1. 📜 重要使用声明  
-   请在使用本项目前阅读并遵守全部条款：  
-   [USE_DECLARATION.md](sslocal://flow/file_open?url=USE_DECLARATION.md&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
-
-2. ⚖️ 开源许可证  
-   本项目授权条款如下：  
-   [LICENSE](sslocal://flow/file_open?url=LICENSE&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
+- 📜 官方使用声明：[USE_DECLARATION.md](sslocal://flow/file_open?url=https%3A%2F%2Fgithub.com%2FMKA930%2FAuto-Registration-Engine%2Fblob%2Fmain%2FUSE_DECLARATION.md&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
+- ⚖️ 开源许可证：[LICENSE](sslocal://flow/file_open?url=https%3A%2F%2Fgithub.com%2FMKA930%2FAuto-Registration-Engine%2Fblob%2Fmain%2FLICENSE&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
